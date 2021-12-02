@@ -15,4 +15,18 @@ public class DepthService {
         }
         return counter;
     }
+    
+    public int depthWindowCounter(List<Integer> depthMeasurements) {
+        int counter = 0;
+        if(depthMeasurements.size() > 3){
+            for(int i = 3; i < depthMeasurements.size(); i++){
+                int nextWindow = depthMeasurements.get(i) + depthMeasurements.get(i - 1) + depthMeasurements.get(i - 2);
+                int firstWindow = depthMeasurements.get(i - 1) + depthMeasurements.get(i - 2) + depthMeasurements.get(i - 3);
+                if(nextWindow > firstWindow) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
+    }
 }

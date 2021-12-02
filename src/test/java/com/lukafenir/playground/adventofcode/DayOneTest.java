@@ -22,4 +22,20 @@ public class DayOneTest {
         System.out.println("How many measurements are larger than the previous measurement?");
         System.out.println(result);
     }
+
+    @Test
+    void doDayOneTaskPartTwo() {
+        System.out.println("========== Running Task ==========");
+        InputReader inputReader = new InputReader();
+        DepthService depthService = new DepthService();
+        String fileAbsolutePath = new File("src/test/resources/day-one").getAbsolutePath();
+
+        List<Integer> integers = inputReader.readIntsFromFile(fileAbsolutePath);
+        System.out.println("Size of file");
+        System.out.println(integers.size());
+        int result = depthService.depthWindowCounter(integers);
+
+        System.out.println("How many windows of measurements are larger than the previous window of measurements?");
+        System.out.println(result);
+    }
 }

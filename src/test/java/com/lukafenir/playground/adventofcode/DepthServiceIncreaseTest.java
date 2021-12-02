@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DepthServiceTest {
+class DepthServiceIncreaseTest {
     
     @Test
     void givenEmptyListOfInputs_depthIncCounterReturnsZero() {
