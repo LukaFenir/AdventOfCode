@@ -1,4 +1,4 @@
-package com.lukafenir.playground.adventofcode;
+package com.lukafenir.playground.adventofcode.dayone;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
-package com.lukafenir.playground.adventofcode;
+package com.lukafenir.playground.adventofcode.common;
 
+import com.lukafenir.playground.adventofcode.common.InputReader;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class InputReaderTest {
 
     @Test
-    void givenEmptyFile_readFileReturnsEmptyList() {
+    void givenEmptyFile_readStringFileReturnsEmptyList() {
         //given
         String fileAbsolutePath = new File("src/test/resources/no-input").getAbsolutePath();
 
@@ -25,7 +26,7 @@ public class InputReaderTest {
     }
 
     @Test
-    void givenFileWithAnEmptyString_readFileReturnsListWithAnEmptyString() {
+    void givenFileWithAnEmptyString_readStringFileReturnsListWithAnEmptyString() {
         //given
         String fileAbsolutePath = new File("src/test/resources/empty-string").getAbsolutePath();
 
@@ -40,7 +41,7 @@ public class InputReaderTest {
     }
 
     @Test
-    void givenFileWithFiveLines_readFileReturnsArrayOfFiveStrings() {
+    void givenFileWithFiveLines_readStringFileReturnsArrayOfFiveStrings() {
         //given
         String fileAbsolutePath = new File("src/test/resources/five-strings").getAbsolutePath();
 
@@ -99,7 +100,7 @@ public class InputReaderTest {
     }
 
     @Test
-    void givenFileWithFiveIntegers_readFileReturnsArrayOfFiveIntegers() {
+    void givenFileWithFiveIntegers_readIntFileReturnsArrayOfFiveIntegers() {
         //given
         String fileAbsolutePath = new File("src/test/resources/five-integers").getAbsolutePath();
 
@@ -115,5 +116,25 @@ public class InputReaderTest {
         assertThat(integers.get(2)).isEqualTo(0);
         assertThat(integers.get(3)).isEqualTo(9283);
         assertThat(integers.get(4)).isEqualTo(2147483647);
+    }
+    
+    @Test
+    void givenFileWithDayTwoData_readStringFileReturnsListOfStringInstructions(){
+        //given
+        String fileAbsolutePath = new File("src/test/resources/daytwo/example").getAbsolutePath();
+
+        InputReader inputReader = new InputReader();
+
+        //when
+        List<String> strings = inputReader.readStringsFromFile(fileAbsolutePath);
+
+        //then
+        assertThat(strings.size()).isEqualTo(6);
+        assertThat(strings.get(0)).isEqualTo("forward 5");
+        assertThat(strings.get(1)).isEqualTo("down 5");
+        assertThat(strings.get(2)).isEqualTo("forward 8");
+        assertThat(strings.get(3)).isEqualTo("up 3");
+        assertThat(strings.get(4)).isEqualTo("down 8");
+        assertThat(strings.get(5)).isEqualTo("forward 2");
     }
 }

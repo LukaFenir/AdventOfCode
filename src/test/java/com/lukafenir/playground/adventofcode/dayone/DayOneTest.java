@@ -1,9 +1,12 @@
-package com.lukafenir.playground.adventofcode;
+package com.lukafenir.playground.adventofcode.dayone;
 
+import com.lukafenir.playground.adventofcode.common.InputReader;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DayOneTest {
 
@@ -12,11 +15,11 @@ public class DayOneTest {
         System.out.println("========== Running Task ==========");
         InputReader inputReader = new InputReader();
         DepthService depthService = new DepthService();
-        String fileAbsolutePath = new File("src/test/resources/day-one").getAbsolutePath();
+        String fileAbsolutePath = new File("src/test/resources/dayone/day-one").getAbsolutePath();
 
         List<Integer> integers = inputReader.readIntsFromFile(fileAbsolutePath);
         System.out.println("Size of file");
-        System.out.println(integers.size());
+        assertThat(integers.size()).isEqualTo(2000);
         int result = depthService.depthIncreaseCounter(integers);
 
         System.out.println("How many measurements are larger than the previous measurement?");
@@ -28,11 +31,11 @@ public class DayOneTest {
         System.out.println("========== Running Task ==========");
         InputReader inputReader = new InputReader();
         DepthService depthService = new DepthService();
-        String fileAbsolutePath = new File("src/test/resources/day-one").getAbsolutePath();
+        String fileAbsolutePath = new File("src/test/resources/dayone/day-one").getAbsolutePath();
 
         List<Integer> integers = inputReader.readIntsFromFile(fileAbsolutePath);
         System.out.println("Size of file");
-        System.out.println(integers.size());
+        assertThat(integers.size()).isEqualTo(2000);
         int result = depthService.depthWindowCounter(integers);
 
         System.out.println("How many windows of measurements are larger than the previous window of measurements?");

@@ -1,5 +1,6 @@
-package com.lukafenir.playground.adventofcode;
+package com.lukafenir.playground.adventofcode.dayone;
 
+import com.lukafenir.playground.adventofcode.dayone.DepthService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

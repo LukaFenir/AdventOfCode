@@ -1,4 +1,4 @@
-package com.lukafenir.playground.adventofcode;
+package com.lukafenir.playground.adventofcode.common;
 
 import java.io.File;
 import java.io.IOException;
