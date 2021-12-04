@@ -6,9 +6,9 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @AllArgsConstructor
-public class PowerConsumption implements Rating {
+public class LifeSupportRating implements Rating {
     
-    private int gammaRate;
-    private int epsilonRate;
+    private int oxygenRate;
+    private int co2ScrubberRate;
     
 }

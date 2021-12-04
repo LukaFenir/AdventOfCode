@@ -8,16 +8,16 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class PowerCalculatorTest {
+class PowerConsumptionCalculatorTest {
 
     @Test
     void givenEmptyListOfInputs_calculationReturnsZeroPowerConsumption() {
         //given
         List<String> noInputs = new ArrayList<>();
-        PowerCalculator powerCalculator = new PowerCalculator();
+        PowerConsumptionCalculator powerCalculator = new PowerConsumptionCalculator();
 
         //when
-        PowerConsumption powerConsumption = powerCalculator.calculatePowerConsumption(noInputs);
+        PowerConsumption powerConsumption = powerCalculator.calculate(noInputs);
         
         //then
         assertThat(powerConsumption.getGammaRate()).isEqualTo(0);
@@ -29,10 +29,10 @@ class PowerCalculatorTest {
         //given
         String input = "011110011410";
         List<String> oneInput = List.of(input);
-        PowerCalculator powerCalculator = new PowerCalculator();
+        PowerConsumptionCalculator powerCalculator = new PowerConsumptionCalculator();
 
         //then
-        assertThatThrownBy(() -> powerCalculator.calculatePowerConsumption(oneInput))
+        assertThatThrownBy(() -> powerCalculator.calculate(oneInput))
                 .isInstanceOf(NumberFormatException.class)
                 .hasMessage("For input string: 011110011410");
     }
@@ -42,10 +42,10 @@ class PowerCalculatorTest {
         //given
         String input = "011110011110";
         List<String> oneInput = List.of(input);
-        PowerCalculator powerCalculator = new PowerCalculator();
+        PowerConsumptionCalculator powerCalculator = new PowerConsumptionCalculator();
 
         //when
-        PowerConsumption powerConsumption = powerCalculator.calculatePowerConsumption(oneInput);
+        PowerConsumption powerConsumption = powerCalculator.calculate(oneInput);
 
         //then
         assertThat(powerConsumption.getGammaRate()).isEqualTo(1950);
@@ -59,10 +59,10 @@ class PowerCalculatorTest {
         String input2 = "101101001111";
         String input3 = "000000010101";
         List<String> oneInput = List.of(input1, input2, input3);
-        PowerCalculator powerCalculator = new PowerCalculator();
+        PowerConsumptionCalculator powerCalculator = new PowerConsumptionCalculator();
 
         //when
-        PowerConsumption powerConsumption = powerCalculator.calculatePowerConsumption(oneInput);
+        PowerConsumption powerConsumption = powerCalculator.calculate(oneInput);
 
         //then
         assertThat(powerConsumption.getGammaRate()).isEqualTo(799);
@@ -75,7 +75,7 @@ class PowerCalculatorTest {
         String input2 = "101101001111";
         String input3 = "000000010101";
         List<String> oneInput = List.of(input1, input2, input3);
-        PowerCalculator powerCalculator = new PowerCalculator();
+        PowerConsumptionCalculator powerCalculator = new PowerConsumptionCalculator();
 
         char[] gammaBinary = powerCalculator.calculateBinaryGammaRate(oneInput);
 

@@ -4,9 +4,10 @@ import java.nio.CharBuffer;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PowerCalculator {
+public class PowerConsumptionCalculator implements DiagnosticCalculator {
     
-    public PowerConsumption calculatePowerConsumption(List<String> inputs) {
+    @Override
+    public PowerConsumption calculate(List<String> inputs) {
         if(inputs.size() == 0){
             return new PowerConsumption(0, 0);
         }
