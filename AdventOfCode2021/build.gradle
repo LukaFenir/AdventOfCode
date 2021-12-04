@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.5.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+
+allprojects {
+    group 'com.lukafenir'
+    version '0.0.1-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+}
+
+processResources {
+    from("${project.rootDir}/AdventOfCode2021/src/main/resources") {
+        expand(project.properties)
+        include 'application.properties'
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+springBoot{
+    buildInfo {
+        properties {
+            artifact = "advent-of-code-2021"
+            name = "advent-of-code-2021"
+            version = "1"
+            additional = [:]
+        }
+    }
+}
+
+bootRun {
+    systemProperties = System.properties
+    if(project.hasProperty('args')){
+        args = (args + project.args.split(',')).flatten()
+    }
+    args = ["--spring.profiles.active=" + 'local'] + args
+}
+
+bootJar {
+    archiveName "advent-of-code-2021"
+    baseName "advent-of-code-2021"
+    archiveFileName = "advent-of-code-2021.jar"
+}
+
+test {
+    useJUnitPlatform()
+}

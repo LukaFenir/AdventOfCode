@@ -1,1 +1,2 @@
-rootProject.name = 'playground'
+rootProject.name = 'AdventOfCode'
+include 'AdventOfCode2021'

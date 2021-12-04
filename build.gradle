@@ -1,30 +1,30 @@
-plugins {
-	id 'org.springframework.boot' version '2.6.1'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
 }
 
-group = 'com.lukafenir'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+group 'com.lukafenir'
+version '1.0-SNAPSHOT'
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+subprojects {
+
+    repositories {
+        mavenCentral()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'application'
+
+    test {
+        useJUnitPlatform()
+        minHeapSize = "1024m"
+        maxHeapSize = "1024m"
+        jvmArgs = ['-XX:MaxMetaspaceSize=256m', '-XX:CompressedClassSpaceSize=64m', '-XX:ReservedCodeCacheSize=64m']
+    }
 }
 
-repositories {
-	mavenCentral()
-}
-
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-test {
-	useJUnitPlatform()
+wrapper {
+    gradleVersion = '7.1'
+    distributionType = Wrapper.DistributionType.ALL
 }
