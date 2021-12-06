@@ -32,7 +32,7 @@ public class DayThreeTest {
 
     @Test
     void dayThreeInputTest(){
-        String fileAbsolutePath = new File("src/test/resources/daythree/day-three").getAbsolutePath();
+        String fileAbsolutePath = new File("src/test/resources/daythree/day-four").getAbsolutePath();
         System.out.println("========== Running Day Three, Task One ==========");
         System.out.println("====== Reading Input ======");
         InputReader inputReader = new InputReader();
@@ -68,7 +68,7 @@ public class DayThreeTest {
 
     @Test
     void dayThreeInputTaskTwoTest() throws InterruptedException, ExecutionException {
-        String fileAbsolutePath = new File("src/test/resources/daythree/day-three").getAbsolutePath();
+        String fileAbsolutePath = new File("src/test/resources/daythree/day-four").getAbsolutePath();
         System.out.println("========== Running Day Three, Task One ==========");
         System.out.println("====== Reading Input ======");
         InputReader inputReader = new InputReader();
