@@ -11,32 +11,75 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ParseBoardsTest {
 
     BingoParser bingoParser = new BingoParser();
-    
+
     @Test
     void givenASingleBoardInput_parserReturnsASingleBoard(){
         //given
         List<String> singleBoard = Arrays.asList("22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19");
-        List<List<Integer>> rows = Arrays.asList(
-                Arrays.asList(22,13,17,11,0),
-                Arrays.asList(8,2,23,4,24),
-                Arrays.asList(21,9,14,16,7),
-                Arrays.asList(6,10,3,18,5),
-                Arrays.asList(1,12,20,15,19));
-        List<List<Integer>> columns = Arrays.asList(
-                Arrays.asList(22,8,21,6,1),
-                Arrays.asList(13,2,9,10,12),
-                Arrays.asList(17,23,14,3,20),
-                Arrays.asList(11,4,16,18,15),
-                Arrays.asList(0,24,7,5,19)
-        );
-        
-        Board expectedBoard = new Board(rows, columns);
+        List<Board> expectedBoard = twoBoards();
 
         //when
         List<Board> boards = bingoParser.parseBoards(singleBoard);
-        
+
         //then
         assertThat(boards.size()).isEqualTo(1);
-        assertThat(boards.get(0)).isEqualTo(expectedBoard);
+        assertThat(boards.get(0)).isEqualTo(expectedBoard.get(0));
+    }
+
+    @Test
+    void givenTwoBoardsInput_parserReturnsTwoBoards(){
+        //given
+        List<String> singleBoard = Arrays.asList(
+                "22 13 17 11  0", " 8  2 23  4 24", "21  9 14 16  7", " 6 10  3 18  5", " 1 12 20 15 19", "",
+                " 3 15  0  2 22", " 9 18 13 17  5", "19  8  7 25 23", "20 11 10 24  4", "14 21 16 12  6");
+        List<Board> expectedBoards = twoBoards();
+        
+        //when
+        List<Board> boards = bingoParser.parseBoards(singleBoard);
+
+        //then
+        assertThat(boards.size()).isEqualTo(2);
+        assertThat(boards.get(0)).isEqualTo(expectedBoards.get(0));
+        assertThat(boards.get(1)).isEqualTo(expectedBoards.get(1));
+    }
+    
+    //############################################# Test Data
+    
+    public List<Board> singleBoard(){
+        List<List<Board.Box>> rows = Arrays.asList(
+                Arrays.asList(new Board.Box(22),new Board.Box(13),new Board.Box(17),new Board.Box(11),new Board.Box(0)),
+                Arrays.asList(new Board.Box(8),new Board.Box(2),new Board.Box(23),new Board.Box(4),new Board.Box(24)),
+                Arrays.asList(new Board.Box(21),new Board.Box(9),new Board.Box(14),new Board.Box(16),new Board.Box(7)),
+                Arrays.asList(new Board.Box(6),new Board.Box(10),new Board.Box(3),new Board.Box(18),new Board.Box(5)),
+                Arrays.asList(new Board.Box(1),new Board.Box(12),new Board.Box(20),new Board.Box(15),new Board.Box(19)));
+        List<List<Board.Box>> columns = Arrays.asList(
+                Arrays.asList(new Board.Box(22),new Board.Box(8),new Board.Box(21),new Board.Box(6),new Board.Box(1)),
+                Arrays.asList(new Board.Box(13),new Board.Box(2),new Board.Box(9),new Board.Box(10),new Board.Box(12)),
+                Arrays.asList(new Board.Box(17),new Board.Box(23),new Board.Box(14),new Board.Box(3),new Board.Box(20)),
+                Arrays.asList(new Board.Box(11),new Board.Box(4),new Board.Box(16),new Board.Box(18),new Board.Box(15)),
+                Arrays.asList(new Board.Box(0),new Board.Box(24),new Board.Box(7),new Board.Box(5),new Board.Box(19))
+        );
+        
+        return new ArrayList<>(List.of(new Board(rows, columns)));
+    }
+
+    public List<Board> twoBoards(){
+        List<Board> boards = singleBoard();
+        List<List<Board.Box>> rows = Arrays.asList(
+                Arrays.asList(new Board.Box(3),new Board.Box(15),new Board.Box(0),new Board.Box(2),new Board.Box(22)),
+                Arrays.asList(new Board.Box(9),new Board.Box(18),new Board.Box(13),new Board.Box(17),new Board.Box(5)),
+                Arrays.asList(new Board.Box(19),new Board.Box(8),new Board.Box(7),new Board.Box(25),new Board.Box(23)),
+                Arrays.asList(new Board.Box(20),new Board.Box(11),new Board.Box(10),new Board.Box(24),new Board.Box(4)),
+                Arrays.asList(new Board.Box(14),new Board.Box(21),new Board.Box(16),new Board.Box(12),new Board.Box(6)));
+        List<List<Board.Box>> columns = Arrays.asList(
+                Arrays.asList(new Board.Box(3),new Board.Box(9),new Board.Box(19),new Board.Box(20),new Board.Box(14)),
+                Arrays.asList(new Board.Box(15),new Board.Box(18),new Board.Box(8),new Board.Box(11),new Board.Box(21)),
+                Arrays.asList(new Board.Box(0),new Board.Box(13),new Board.Box(7),new Board.Box(10),new Board.Box(16)),
+                Arrays.asList(new Board.Box(2),new Board.Box(17),new Board.Box(25),new Board.Box(24),new Board.Box(12)),
+                Arrays.asList(new Board.Box(22),new Board.Box(5),new Board.Box(23),new Board.Box(4),new Board.Box(6))
+        );
+
+        boards.add(new Board(rows, columns));
+        return boards;
     }
 }

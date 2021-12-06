@@ -15,7 +15,7 @@ public class ParseNumbersTest {
         //given
         String oneValue = "24";
 
-        List<Integer> drawnNumbers = bingoParser.parseNumbers(oneValue);
+        List<Integer> drawnNumbers = bingoParser.parseDrawnNumbers(oneValue);
         
         assertThat(drawnNumbers.size()).isEqualTo(1);
         assertThat(drawnNumbers.get(0)).isEqualTo(24);
@@ -26,7 +26,7 @@ public class ParseNumbersTest {
         //given
         String twoValues = "24,2";
 
-        List<Integer> drawnNumbers = bingoParser.parseNumbers(twoValues);
+        List<Integer> drawnNumbers = bingoParser.parseDrawnNumbers(twoValues);
 
         assertThat(drawnNumbers.size()).isEqualTo(2);
         assertThat(drawnNumbers.get(0)).isEqualTo(24);
@@ -39,7 +39,7 @@ public class ParseNumbersTest {
         String twoValues = "7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1";
         List<Integer> expectedList = List.of(7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1);
 
-        List<Integer> drawnNumbers = bingoParser.parseNumbers(twoValues);
+        List<Integer> drawnNumbers = bingoParser.parseDrawnNumbers(twoValues);
 
         assertThat(drawnNumbers.size()).isEqualTo(27);
         assertThat(drawnNumbers).isEqualTo(expectedList);
