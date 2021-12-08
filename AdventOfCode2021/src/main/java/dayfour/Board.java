@@ -1,5 +1,6 @@
 package dayfour;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -8,19 +9,10 @@ import java.util.List;
 @Data
 public class Board {
     
-    private Box[][] boxes = new Box[5][5];
-    
-    private List<List<Box>> rows;
-    private List<List<Box>> columns;
-
-    public Board(List<List<Box>> rows, List<List<Box>>columns){
-        this.rows = rows;
-        this.columns = columns;
-    }
+    private Box[][] boxes;
     
     public Board(){
-        this.rows = new ArrayList<>();
-        this.columns = new ArrayList<>();
+        this.boxes = new Box[5][5];
     }
 
     public Board(Box[][] boxes){
@@ -35,13 +27,52 @@ public class Board {
         this.boxes[index] = row;
     }
 
-    public List<Box> getUnmarked(){
-        return new ArrayList<>();
+    public int getUnmarkedSum(){
+        int sum = 0;
+        for(Box[] row : boxes){
+            for(Box box : row){
+                if(!box.isMarked()){
+                    sum += box.number;
+                }
+            }
+        }
+        return sum;
+    }
+    
+    public boolean markedNumberIsWinner(Integer drawnNumber){
+        for(int row = 0; row < 5; row++){
+            for(int col = 0; col < 5; col++){
+                if(boxes[row][col].number.equals(drawnNumber)){
+                    boxes[row][col].marked = true;
+                    //row is complete
+                    //TODO erm?
+                    boolean rowIsLine = true;
+                    boolean colIsLine = true;
+                    for(int k = 0; k < 5; k++){
+                        if(!boxes[row][k].isMarked()){
+                            rowIsLine = false;
+                            break;
+                        }
+                    }
+                    //if not a row, a column?
+                    if(!rowIsLine){
+                        for(int k = 0; k < 5; k++){
+                            if(!boxes[k][col].isMarked()){
+                                colIsLine = false;
+                                break;
+                            }
+                        }
+                    }
+                    return rowIsLine || colIsLine;
+                };
+            }
+        }
+        return false;
     }
 
     @Data
-    static
-    class Box {
+    @AllArgsConstructor
+    static class Box {
         
         private Integer number;
         private boolean marked;

@@ -14,6 +14,9 @@ import java.util.concurrent.ExecutionException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DayFourTest {
+    
+    private final BingoParser bingoParser = new BingoParser();
+    private final BingoService bingoService = new BingoService(bingoParser);
 
     @Test
     void exampleInputTest(){
@@ -22,32 +25,30 @@ public class DayFourTest {
         System.out.println("====== Reading Input ======");
         InputReader inputReader = new InputReader();
         List<String> inputs = inputReader.readStringsFromFile(fileAbsolutePath);
-        assertThat(inputs.size()).isEqualTo(12);
+        assertThat(inputs.size()).isEqualTo(19);
 
-        PowerConsumptionCalculator powerCalculator = new PowerConsumptionCalculator();
-        PowerConsumption powerConsumption = powerCalculator.calculate(inputs);
+        WinningBoard winningBoard = bingoService.runGame(inputs);
 
-        int result = powerConsumption.getGammaRate() * powerConsumption.getEpsilonRate();
-        System.out.println("What is the power consumption of the submarine?");
+        int result = winningBoard.getBoard().getUnmarkedSum() * winningBoard.getWinningNumber();
+        System.out.println("What will your final score be if you choose that board?");
         System.out.println(result);
 
-        assertThat(result).isEqualTo(198);
+        assertThat(result).isEqualTo(4512);
     }
 
     @Test
     void dayFourInputTest(){
-        String fileAbsolutePath = new File("src/test/resources/daythree/day-four").getAbsolutePath();
+        String fileAbsolutePath = new File("src/test/resources/dayfour/day-four").getAbsolutePath();
         System.out.println("========== Running Day Three, Task One ==========");
         System.out.println("====== Reading Input ======");
         InputReader inputReader = new InputReader();
         List<String> inputs = inputReader.readStringsFromFile(fileAbsolutePath);
-        assertThat(inputs.size()).isEqualTo(1000);
+        assertThat(inputs.size()).isEqualTo(601);
 
-        PowerConsumptionCalculator powerCalculator = new PowerConsumptionCalculator();
-        PowerConsumption powerConsumption = powerCalculator.calculate(inputs);
+        WinningBoard winningBoard = bingoService.runGame(inputs);
 
-        int result = powerConsumption.getGammaRate() * powerConsumption.getEpsilonRate();
-        System.out.println("What is the power consumption of the submarine?");
+        int result = winningBoard.getBoard().getUnmarkedSum() * winningBoard.getWinningNumber();
+        System.out.println("What will your final score be if you choose that board?");
         System.out.println(result);
     }
 
