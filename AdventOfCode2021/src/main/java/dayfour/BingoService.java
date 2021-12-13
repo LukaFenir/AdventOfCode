@@ -1,5 +1,6 @@
 package dayfour;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BingoService {
@@ -11,8 +12,7 @@ public class BingoService {
     }
 
     public WinningBoard runGame(List<String> inputs){
-        List<String> boardStrings = inputs.subList(2, inputs.size());
-        List<Board> boards = parser.parseBoards2(boardStrings);
+        List<Board> boards = parser.parseBoards2(inputs.subList(2, inputs.size()));
         List<Integer> drawnNumbers = parser.parseDrawnNumbers(inputs.get(0));
         
         for(Integer number : drawnNumbers){
@@ -25,6 +25,27 @@ public class BingoService {
             }
         }
         
+        return new WinningBoard(boards.get(0), 1);
+    }
+    
+    public WinningBoard runLosingGame(List<String> inputs){
+        List<Board> boards = parser.parseBoards2(inputs.subList(2, inputs.size()));
+        List<Integer> drawnNumbers = parser.parseDrawnNumbers(inputs.get(0));
+        
+        List<Board> found = new ArrayList<>();
+
+        for (Integer number : drawnNumbers) {
+            for(Board board : boards) {
+                boolean isWinner = board.markedNumberIsWinner(number);
+                //if a board wins, remove board from the list
+                if(isWinner && boards.size() > 1) {
+                    found.add(board);
+                } else if (isWinner) {
+                    return new WinningBoard(board, number);
+                }
+            }
+            boards.removeAll(found);
+        }
         return new WinningBoard(boards.get(0), 1);
     }
 }

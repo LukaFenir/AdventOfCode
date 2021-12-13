@@ -54,11 +54,35 @@ public class DayFourTest {
 
     @Test
     void exampleInputTaskTwoTest() throws InterruptedException, ExecutionException {
+        String fileAbsolutePath = new File("src/test/resources/dayfour/example").getAbsolutePath();
+        System.out.println("========== Running Day Four, Task One ==========");
+        System.out.println("====== Reading Input ======");
+        InputReader inputReader = new InputReader();
+        List<String> inputs = inputReader.readStringsFromFile(fileAbsolutePath);
+        assertThat(inputs.size()).isEqualTo(19);
 
+        WinningBoard winningBoard = bingoService.runLosingGame(inputs);
+
+        int result = winningBoard.getBoard().getUnmarkedSum() * winningBoard.getWinningNumber();
+        System.out.println("What will your final score be if you choose that board?");
+        System.out.println(result);
+
+        assertThat(result).isEqualTo(1924);
     }
 
     @Test
     void dayFourInputTaskTwoTest() throws InterruptedException, ExecutionException {
+        String fileAbsolutePath = new File("src/test/resources/dayfour/day-four").getAbsolutePath();
+        System.out.println("========== Running Day Three, Task One ==========");
+        System.out.println("====== Reading Input ======");
+        InputReader inputReader = new InputReader();
+        List<String> inputs = inputReader.readStringsFromFile(fileAbsolutePath);
+        assertThat(inputs.size()).isEqualTo(601);
 
+        WinningBoard winningBoard = bingoService.runLosingGame(inputs);
+
+        int result = winningBoard.getBoard().getUnmarkedSum() * winningBoard.getWinningNumber();
+        System.out.println("What will your final score be if you choose that board?");
+        System.out.println(result);
     }
 }
